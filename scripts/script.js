@@ -39,7 +39,7 @@ class BudgetCategory {
       const newEntry = document.createElement("li");
       newEntry.setAttribute("index", index);
       newEntry.classList.add(`${this.name}`);
-      newEntry.innerHTML= this.items[index].displayHTML();
+      newEntry.innerHTML = this.items[index].displayHTML();
       categoryUL.append(newEntry);
     }
 
@@ -51,6 +51,7 @@ class BudgetCategory {
 
 class TotalBudget {
   constructor() {
+    this.maxBudget = 0;
     this.categories = [
       new BudgetCategory("bills"),
       new BudgetCategory("food"),
@@ -63,19 +64,26 @@ class TotalBudget {
   }
   addItem(name, cost, categoryName) {
     this.getCategory(categoryName).addItem(name, cost);
+    this.displayBudgetRemaining();
   }
   removeItem(index, categoryName) {
     this.getCategory(categoryName).removeItemAt(index);
+    this.displayBudgetRemaining();
   }
   calculateTotal() {
     let total = 0;
-    for (let category of this) {
+    for (let category of this.categories) {
       total += category.calculateTotal();
     }
     return total;
   }
   displayCategory(categoryName) {
     this.getCategory(categoryName).display();
+  }
+  displayBudgetRemaining() {
+    let remaining = this.maxBudget - this.calculateTotal();
+    document.querySelector("p.budget-remaining").innerText = `Remaining Budget: $${remaining}`;
+    //TODO do some checking to see if over budget
   }
 }
 
@@ -112,10 +120,21 @@ function removeItemFromCategory(event) {
   totalBudget.displayCategory(categoryName);
 }
 
+function updateMaxBudget(event) {
+  event.preventDefault();
+  totalBudget.maxBudget = Number(event.target.children[0].value);
+  document.querySelector("p.budget-max").innerText = `Total Budget: $${totalBudget.maxBudget}`;
+  totalBudget.displayBudgetRemaining(); //update the budget remaining
+
+  event.target.children[0].value = ""; //clear the input
+}
+
 let main = document.querySelector("main");
 main.addEventListener("submit", function(event) {
   if (event.target.classList.contains("add-item")) {
     addItemToCategory(event);
+  } else if (event.target.classList.contains("max-budget-form")) {
+    updateMaxBudget(event);
   }
 });
 
@@ -125,4 +144,4 @@ main.addEventListener("click", function(event) {
   }
 });
 
-console.log(totalBudget);
+//console.log(totalBudget);
