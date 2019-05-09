@@ -9,7 +9,7 @@ class BudgetItem {
     return `
     <p>${this.name}</p>
     <p>$${this.cost}</p>
-    <button>Remove</button>
+    <button class="remove-btn">Remove</button>
     `;
   }
 }
@@ -20,7 +20,10 @@ class BudgetCategory {
     this.items = [];
   }
   addItem(name, cost) {
-    this.items.push(new BudgetItem(name, cost));
+    this.items = [...this.items, new BudgetItem(name, cost)];
+  }
+  removeItemAt(index) {
+    this.items = [...this.items.slice(0, index), ...this.items.slice(index + 1)];
   }
   calculateTotal() {
     let total = 0;
@@ -35,6 +38,7 @@ class BudgetCategory {
     for(let index in this.items) {
       const newEntry = document.createElement("li");
       newEntry.setAttribute("index", index);
+      newEntry.classList.add(`${this.name}`);
       newEntry.innerHTML= this.items[index].displayHTML();
       categoryUL.append(newEntry);
     }
@@ -55,6 +59,9 @@ class TotalBudget {
   }
   addItem(name, cost, categoryName) {
     this.getCategory(categoryName).addItem(name, cost);
+  }
+  removeItem(index, categoryName) {
+    this.getCategory(categoryName).removeItemAt(index);
   }
   calculateTotal() {
     let total = 0;
@@ -92,11 +99,26 @@ function addItemToCategory(event) {
   event.target.children[1].value = "";
 }
 
+function removeItemFromCategory(event) {
+  //get the index attribute from the list item
+  let index = event.target.parentNode.attributes["index"].value;
+  //get the class (category name) from the list item
+  let categoryName = event.target.parentNode.classList[0];
+  totalBudget.removeItem(index, categoryName);
+  totalBudget.displayCategory(categoryName);
+}
+
 let main = document.querySelector("main");
 main.addEventListener("submit", function(event) {
   if (event.target.classList.contains("add-item")) {
     addItemToCategory(event);
   }
-})
+});
+
+main.addEventListener("click", function(event) {
+  if (event.target.classList.contains("remove-btn")) {
+    removeItemFromCategory(event);
+  }
+});
 
 console.log(totalBudget);
