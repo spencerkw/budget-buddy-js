@@ -9,7 +9,7 @@ class BudgetItem {
   //returns a formatted HTML block for the item's li element
   displayHTML() {
     return `
-    <p>${this.name}</p>
+    <p class="item-name">${this.name}</p>
     <p>$${this.cost}</p>
     <button class="remove-btn">Remove</button>
     `;

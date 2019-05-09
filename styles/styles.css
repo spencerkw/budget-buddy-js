@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Indie+Flower|Noto+Sans+TC");
 
-
 html {
   background-image: url("../img/wood-table.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: right 0 top 0;
 }
 
 body {
@@ -37,6 +37,10 @@ a {
   margin: 5px;
 }
 
+a:hover {
+    color: grey;
+}
+
 main, section {
   display: flex;
   flex-direction: column;
@@ -46,16 +50,18 @@ main, section {
 main {
   font-family: 'Indie Flower', cursive;
   border-radius: 5px;
+  border: solid, 5px black;
 }
 
 section {
   width: 90%;
   border-radius: 10px;
   font-size: 1.35rem;
+  padding: 10px;
 }
 
 .total-budget-section {
-  background-color: rgba(0,191,255, 0.6);
+  background-color: rgba(0, 191, 255, 0.6);
   
 }
 
@@ -78,7 +84,39 @@ section {
   flex-direction: column;
 }
 
-input {
-  border-radius: 10px;
+ul {
+  list-style: none;
+  padding: 0;
+}
 
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dotted #ccc;
+}
+
+li * {
+  margin: 0 5px;
+}
+
+li .item-name {
+  flex: 1;
+}
+
+form {
+  display: flex;
+}
+
+form * {
+  margin: 0 5px;
+  padding: 5px;
+}
+
+form.add-item * {
+  max-width: 30%;
+}
+
+input, button {
+  border-radius: 10px;
 }
