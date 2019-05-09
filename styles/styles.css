@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower|Noto+Sans+TC");
+
+
+html {
+  background-image: url("../img/wood-table.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+header {
+  display: flex;
+  padding: 0 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.site-title {
+  flex: 1;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  margin: 5px;
+}
+
+main, section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  font-family: 'Indie Flower', cursive;
+  border-radius: 5px;
+}
+
+section {
+  width: 90%;
+  border-radius: 10px;
+  font-size: 1.35rem;
+}
+
+.total-budget-section {
+  background-color: rgba(0,191,255, 0.6);
+  
+}
+
+.categories-section {
+  background-color: rgba(250, 238, 152, 0.6);
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-title:first-child {
+  text-decoration: underline;
+  flex: 1;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border-radius: 10px;
+
+}
