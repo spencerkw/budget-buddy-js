@@ -42,6 +42,10 @@ class BudgetCategory {
       newEntry.innerHTML= this.items[index].displayHTML();
       categoryUL.append(newEntry);
     }
+
+    //update the visual category total
+    let sectionTotalP = document.querySelector(`p.section-total.${this.name}`);
+    sectionTotalP.innerText = `$${this.calculateTotal()}`;
   }
 }
 
