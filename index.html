@@ -4,11 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/styles.css">
   <title>Budget Buddy</title>
 </head>
 <body>
+  <header>
+    <p class="site-title">Budget Buddy</p>
+    <nav></nav>
+  </header>
   
+  <main>
+    <h1>My Budget</h1>
+    <section class="total-budget-section">
+      <input type="text" placeholder="Maximum Budget">
+    </section>
+    <section class="categories-section">
+      <div class="category bills">
+        <div class="section-title">
+          <p>Bills</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button category="bills">Add Item</button>
+        </form>
+
+        <ul class="item-list bills-list"></ul>
+      </div>
+
+      <div class="category food">
+        <div class="section-title">
+          <p>Food</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button category="food">Add Item</button>
+        </form>
+
+        <ul class="item-list food-list"></ul>
+      </div>
+
+      <div class="category clothing">
+        <div class="section-title">
+          <p>Clothing</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button category="clothing">Add Item</button>
+        </form>
+        
+        <ul class="item-list clothing-list"></ul>
+      </div>
+
+      <div class="category entertainment">
+        <div class="section-title">
+          <p>Entertainment</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button category="entertainment">Add Item</button>
+        </form>
+
+        <ul class="item-list entertainment-list"></ul>
+      </div>
+    </section>
+  </main>
+
   <script src="scripts/script.js"></script>
 </body>
 </html>
