@@ -8,7 +8,79 @@
   <title>Budget Buddy</title>
 </head>
 <body>
+  <header>
+    <p class="site-title">Budget Buddy</p>
+    <nav></nav>
+  </header>
   
+  <main>
+    <h1>My Budget</h1>
+    <section class="total-budget-section">
+      <input type="text" placeholder="Maximum Budget">
+    </section>
+    <section class="categories-section">
+      <div class="category bills">
+        <div class="section-title">
+          <p>Bills</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button>Add Item</button>
+        </form>
+
+        <ul class="item-list bills-list"></ul>
+      </div>
+
+      <div class="category food">
+        <div class="section-title">
+          <p>Food</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button>Add Item</button>
+        </form>
+
+        <ul class="item-list food-list"></ul>
+      </div>
+
+      <div class="category clothing">
+        <div class="section-title">
+          <p>Clothing</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button>Add Item</button>
+        </form>
+        
+        <ul class="item-list clothing-list"></ul>
+      </div>
+
+      <div class="category entertainment">
+        <div class="section-title">
+          <p>Entertainment</p>
+          <p class="section-total">Total</p>
+        </div>
+
+        <form class="add-item">
+          <input type="text" placeholder="Item Name">
+          <input type="text" placeholder="Item Cost">
+          <button>Add Item</button>
+        </form>
+
+        <ul class="item-list entertainment-list"></ul>
+      </div>
+    </section>
+  </main>
+
   <script src="scripts/script.js"></script>
 </body>
 </html>
