@@ -5,6 +5,13 @@ class BudgetItem {
     this.name = name;
     this.cost = cost;
   }
+  displayHTML() {
+    return `
+    <p>${this.name}</p>
+    <p>$${this.cost}</p>
+    <button>Remove</button>
+    `;
+  }
 }
 
 class BudgetCategory {
@@ -22,28 +29,32 @@ class BudgetCategory {
     }
     return total;
   }
+  display() {
+    let categoryUL = document.querySelector(`ul.item-list.${this.name}`);
+    categoryUL.innerHTML = "";
+    for(let index in this.items) {
+      const newEntry = document.createElement("li");
+      newEntry.setAttribute("index", index);
+      newEntry.innerHTML= this.items[index].displayHTML();
+      categoryUL.append(newEntry);
+    }
+  }
 }
 
 class TotalBudget {
   constructor() {
-    // this.categories = [
-    //   new BudgetCategory("Bills"),
-    //   new BudgetCategory("Food"),
-    //   new BudgetCategory("Clothing"),
-    //   new BudgetCategory("Entertainment")
-    // ];
-    this.bills = new BudgetCategory("bills");
-    this.food = new BudgetCategory("food");
-    this.clothing = new BudgetCategory("clothing");
-    this.entertainment = new BudgetCategory("entertainment");
+    this.categories = [
+      new BudgetCategory("bills"),
+      new BudgetCategory("food"),
+      new BudgetCategory("clothing"),
+      new BudgetCategory("entertainment")
+    ];
+  }
+  getCategory(categoryName) {
+    return this.categories.find(category => category.name === categoryName);
   }
   addItem(name, cost, categoryName) {
-    for (let category of this) {
-      if (category.name === categoryName.toLowerCase()) {
-        category.addItem(name, cost);
-        break;
-      }
-    }
+    this.getCategory(categoryName).addItem(name, cost);
   }
   calculateTotal() {
     let total = 0;
@@ -52,4 +63,40 @@ class TotalBudget {
     }
     return total;
   }
+  displayCategory(categoryName) {
+    this.getCategory(categoryName).display();
+  }
 }
+
+const totalBudget = new TotalBudget();
+//console.log(totalBudget.addItem);
+
+function addItemToCategory(event) {
+  event.preventDefault();
+  // console.dir(event);
+  // console.dir(event.target);
+  //event.target is the form that was submitted
+
+  //get the category name via the form's class
+  let categoryName = event.target.classList[1];
+  //get the input values
+  let name = event.target.children[0].value;
+  let cost = Number(event.target.children[1].value);
+
+  totalBudget.addItem(name, cost, categoryName);
+  totalBudget.displayCategory(categoryName);
+
+  //clear the form inputs and refocus the first one
+  event.target.children[0].focus();
+  event.target.children[0].value = "";
+  event.target.children[1].value = "";
+}
+
+let main = document.querySelector("main");
+main.addEventListener("submit", function(event) {
+  if (event.target.classList.contains("add-item")) {
+    addItemToCategory(event);
+  }
+})
+
+console.log(totalBudget);
