@@ -51,6 +51,7 @@ main {
   font-family: 'Indie Flower', cursive;
   border-radius: 5px;
   border: solid, 5px black;
+  padding-bottom: 50px; /*to make sure the footer doesn't cover anything*/
 }
 
 section {
@@ -62,7 +63,10 @@ section {
 
 .total-budget-section {
   background-color: rgba(0, 191, 255, 0.6);
-  
+}
+
+.total-budget-section * {
+  margin: 8px 0;
 }
 
 .categories-section {
@@ -120,3 +124,31 @@ form.add-item * {
 input, button {
   border-radius: 10px;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  /* display: flex; */
+  display: none;
+  animation-play-state: paused; /*set this to running when it shows*/
+  justify-content: center;
+
+  background-image: repeating-linear-gradient(135deg, #ebd007, #ebd007 30px, #555 30px, #555 60px);
+  color: white;
+
+  font-size: 1.25rem;
+
+  animation-name: flash;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes flash {
+  0% {color: white;}
+  50% {color: red;}
+  100% {color: white;}
+}
+
