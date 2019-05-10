@@ -117,6 +117,7 @@ section {
 .category {
   display: flex;
   flex-direction: column;
+  min-width: 75%;
 }
 
 .category>* {
@@ -202,6 +203,7 @@ footer {
     display: flex;
     flex-direction: column;
     flex: 0 1 45%;
+    min-width: auto;
   }
 
   .category input {
