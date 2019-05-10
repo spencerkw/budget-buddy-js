@@ -112,6 +112,11 @@ class TotalBudget {
       alertFooter.style.animationPlayState = "running";
       //make the remaining budget red
       budgetRemainingP.style.color = "red";
+
+      //play the warning sound
+      warningSound.pause();
+      warningSound.currentTime = 0;
+      warningSound.play();
     } else if (remaining >= 0 && alertFooter.style.display !== "none") { //if we're not over budget and the footer is showing
       //hide the footer and pause the animation
       alertFooter.style.display = "none";
@@ -126,6 +131,7 @@ class TotalBudget {
 const totalBudget = new TotalBudget();
 const registerSound = document.querySelector("#register-sound");
 registerSound.volume = 0.5;
+const warningSound = document.querySelector("#warning-sound");
 //console.log(totalBudget.addItem);
 
 //handler for when one of the add item forms is submitted
@@ -205,6 +211,10 @@ function updateMaxBudget(event) {
     totalBudget.displayBudgetRemaining(); //update the budget remaining
 
     event.target.children[0].value = ""; //clear the input
+
+    registerSound.pause();
+    registerSound.currentTime = 0;
+    registerSound.play();
   }
 }
 
