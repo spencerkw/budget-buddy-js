@@ -102,8 +102,23 @@ class TotalBudget {
   //updates the display for the remaining budget
   displayBudgetRemaining() {
     let remaining = this.maxBudget - this.calculateTotal();
-    document.querySelector("p.budget-remaining").innerText = `Remaining Budget: $${remaining}`;
+    let budgetRemainingP = document.querySelector("p.budget-remaining");
+    budgetRemainingP.innerText = `Remaining Budget: $${remaining}`;
     //TODO do some checking to see if over budget
+    let alertFooter = document.querySelector("footer");
+    if (remaining < 0 && alertFooter.style.display === "none") { //if we're over budget and haven't displayed the footer yet
+      //display it and start the animation again
+      alertFooter.style.display = "flex";
+      alertFooter.style.animationPlayState = "running";
+      //make the remaining budget red
+      budgetRemainingP.style.color = "red";
+    } else if (remaining >= 0 && alertFooter.style.display !== "none") { //if we're not over budget and the footer is showing
+      //hide the footer and pause the animation
+      alertFooter.style.display = "none";
+      alertFooter.style.animationPlayState = "paused";
+      //make the remaining budget normal color
+      budgetRemainingP.style.color = "inherit";
+    }
   }
 }
 
