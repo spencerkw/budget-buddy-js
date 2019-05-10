@@ -160,6 +160,11 @@ function updateMaxBudget(event) {
   event.target.children[0].value = ""; //clear the input
 }
 
+function collapseCategory(event) {
+  let categoryContainer = event.target.parentNode;
+  categoryContainer.classList.toggle("collapsed");
+}
+
 //add event listeners to the main for both clicking buttons and submitting forms
 let main = document.querySelector("main");
 main.addEventListener("submit", function(event) {
@@ -170,7 +175,9 @@ main.addEventListener("submit", function(event) {
   }
 });
 main.addEventListener("click", function(event) {
-  if (event.target.classList.contains("remove-btn") || event.target.parentNode.classList.contains("remove-btn")) {
+  if (event.target.classList.contains("section-title")) {
+    collapseCategory(event);
+  } else if (event.target.classList.contains("remove-btn") || event.target.parentNode.classList.contains("remove-btn")) {
     removeItemFromCategory(event);
   }
 });

@@ -44,9 +44,8 @@ input, button {
 
 input {
   border: none;
-  border-bottom: 1px dotted black;;
+  border-bottom: 1px dotted black;
   background: none;
-  font-size: 15px;
 }
 
 ::placeholder {
@@ -62,7 +61,7 @@ button {
 }
 
 a:hover {
-    color: grey;
+  color: grey;
 }
 
 main, section {
@@ -100,6 +99,14 @@ section {
 .section-title {
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 10px;
+  
+  cursor: pointer;
+}
+
+.section-title:hover {
+  background-color: rgb(140, 208, 89);
 }
 
 .section-title:first-child {
@@ -110,6 +117,10 @@ section {
 .category {
   display: flex;
   flex-direction: column;
+}
+
+.category>* {
+  margin: 5px;
 }
 
 ul {
@@ -165,6 +176,9 @@ footer {
   animation-iteration-count: infinite;
 }
 
+.collapsed form, .collapsed ul {
+  display: none;
+}
 
 @keyframes flash {
   0% {color: white;}
@@ -193,6 +207,10 @@ footer {
   .category input {
     width: 25%;
     /* margin-bottom: 15px; */
+  }
+
+  input {
+    font-size: 15px;
   }
 
   li {
