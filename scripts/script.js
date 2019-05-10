@@ -117,12 +117,18 @@ class TotalBudget {
       warningSound.pause();
       warningSound.currentTime = 0;
       warningSound.play();
+
+      //disable the forms
+      toggleFormsDisabled(true);
     } else if (remaining >= 0 && alertFooter.style.display !== "none") { //if we're not over budget and the footer is showing
       //hide the footer and pause the animation
       alertFooter.style.display = "none";
       alertFooter.style.animationPlayState = "paused";
       //make the remaining budget normal color
       budgetRemainingP.style.color = "inherit";
+
+      //enable the forms
+      toggleFormsDisabled(false);
     }
   }
 }
@@ -133,6 +139,15 @@ const registerSound = document.querySelector("#register-sound");
 registerSound.volume = 0.5;
 const warningSound = document.querySelector("#warning-sound");
 //console.log(totalBudget.addItem);
+
+function toggleFormsDisabled(state) {
+  let addItemForms = document.querySelectorAll("form.add-item");
+  for (let form of addItemForms) {
+    for (let element of form.children) {
+      element.disabled = state;
+    }
+  }
+}
 
 //handler for when one of the add item forms is submitted
 //adds the item to that category, updates that category's display
