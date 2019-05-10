@@ -131,6 +131,31 @@ class TotalBudget {
       toggleFormsDisabled(false);
     }
   }
+
+  printReceipt() {
+    let receipt = document.querySelector(".receipt");
+    for (let category of this.categories) {
+      let receiptCategoryDiv = receipt.querySelector(`.${category.name}`);
+      receiptCategoryDiv.innerHTML = "";
+      
+      if (category.items.length > 0) {
+        let categoryTitle = document.createElement("h3");
+        categoryTitle.innerText = `${category.name.charAt(0).toUpperCase()}${category.name.slice(1)}`;
+        receiptCategoryDiv.append(categoryTitle);
+
+        let elementList = document.createElement("div");
+        for (let item of category.items) {
+          elementList.innerHTML += `<p>${item.name} @ $${item.cost}</p>`;
+        }
+        receiptCategoryDiv.append(elementList);
+      }
+    }
+
+    let receiptTotal = receipt.querySelector(".receipt-total");
+    receiptTotal.innerText = `$${this.calculateTotal()}/$${this.maxBudget}`;
+
+    receipt.style.display = "block";
+  }
 }
 
 //the budget object
@@ -254,5 +279,10 @@ main.addEventListener("click", function(event) {
     removeItemFromCategory(event);
   }
 });
+
+let receipt = document.querySelector(".receipt");
+receipt.addEventListener("click", function() {
+  receipt.style.display = "none";
+})
 
 //console.log(totalBudget);

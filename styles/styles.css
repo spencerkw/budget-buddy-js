@@ -177,6 +177,22 @@ footer {
   animation-iteration-count: infinite;
 }
 
+.receipt {
+  background-color: white;
+  font-family: Dejavu Sans Mono, monospace;
+  text-align: center;
+
+  width: 300px;
+  padding: 10px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: none;
+}
+
 .collapsed form, .collapsed ul {
   display: none;
 }
