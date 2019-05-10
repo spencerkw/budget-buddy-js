@@ -124,6 +124,8 @@ class TotalBudget {
 
 //the budget object
 const totalBudget = new TotalBudget();
+const registerSound = document.querySelector("#register-sound");
+registerSound.volume = 0.5;
 //console.log(totalBudget.addItem);
 
 //handler for when one of the add item forms is submitted
@@ -165,6 +167,10 @@ function addItemToCategory(event) {
     event.target.children[0].focus();
     event.target.children[0].value = "";
     event.target.children[1].value = "";
+
+    registerSound.pause();
+    registerSound.currentTime = 0;
+    registerSound.play();
   }
 }
 
