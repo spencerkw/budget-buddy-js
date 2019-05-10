@@ -6,6 +6,7 @@ html {
   background-size: cover;
   background-attachment: fixed;
   background-position: right 0 top 0;
+  
 }
 
 body {
@@ -37,8 +38,30 @@ a {
   margin: 5px;
 }
 
+input, button {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+input {
+  border: none;
+  border-bottom: 1px dotted black;
+  background: none;
+}
+
+::placeholder {
+  opacity: 1;
+  color: rgb(240, 248, 255);
+  
+}
+
+button {
+  border-radius: 10px;
+  background-color: rgb(15, 157, 88);
+  border-color: black;
+}
+
 a:hover {
-    color: grey;
+  color: grey;
 }
 
 main, section {
@@ -66,7 +89,7 @@ section {
 }
 
 .total-budget-section * {
-  margin: 8px 0;
+  margin: 8px;
 }
 
 .categories-section {
@@ -76,6 +99,14 @@ section {
 .section-title {
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 10px;
+  
+  cursor: pointer;
+}
+
+.section-title:hover {
+  background-color: rgb(140, 208, 89);
 }
 
 .section-title:first-child {
@@ -86,6 +117,11 @@ section {
 .category {
   display: flex;
   flex-direction: column;
+  min-width: 75%;
+}
+
+.category>* {
+  margin: 5px;
 }
 
 ul {
@@ -121,10 +157,6 @@ form.add-item * {
   max-width: 30%;
 }
 
-input, button {
-  border-radius: 10px;
-}
-
 footer {
   position: fixed;
   bottom: 0;
@@ -145,6 +177,9 @@ footer {
   animation-iteration-count: infinite;
 }
 
+.collapsed form, .collapsed ul {
+  display: none;
+}
 
 @keyframes flash {
   0% {color: white;}
@@ -152,3 +187,46 @@ footer {
   100% {color: white;}
 }
 
+@media only screen and (min-width: 768px) {
+  section {
+    width: 95%;
+  }
+
+  .categories-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 45%;
+    min-width: auto;
+  }
+
+  .category input {
+    width: 25%;
+    /* margin-bottom: 15px; */
+  }
+
+  input {
+    font-size: 15px;
+  }
+
+  li {
+    justify-content: flex-start;
+    max-width: 75%;
+  }
+
+  li .item-name {
+    flex: 0;
+    white-space: nowrap;
+  }
+
+  li .item-cost {
+    flex: 1;
+  }
+
+}
