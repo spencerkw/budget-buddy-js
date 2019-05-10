@@ -181,6 +181,10 @@ footer {
   display: none;
 }
 
+.bad-input {
+  border: 1px dotted red;
+}
+
 @keyframes flash {
   0% {color: white;}
   50% {color: red;}

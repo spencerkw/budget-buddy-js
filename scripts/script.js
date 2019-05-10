@@ -141,13 +141,31 @@ function addItemToCategory(event) {
   let name = event.target.children[0].value;
   let cost = Number(event.target.children[1].value);
 
-  totalBudget.addItem(name, cost, categoryName);
-  totalBudget.displayCategory(categoryName);
+  let goodInput = true; //will be set to false if either input is bad
+  if (!name) { //empty string or other bad output
+    event.target.children[0].classList.add("bad-input");
+    goodInput = false;
+  } else {
+    event.target.children[0].classList.remove("bad-input");
+  }
 
-  //clear the form inputs and refocus the first one
-  event.target.children[0].focus();
-  event.target.children[0].value = "";
-  event.target.children[1].value = "";
+  if (!cost || cost < 0) {
+    event.target.children[1].classList.add("bad-input");
+    goodInput = false;
+  } else {
+    event.target.children[1].classList.remove("bad-input");
+  }
+
+  //if the input is good, proceed
+  if (goodInput) {
+    totalBudget.addItem(name, cost, categoryName);
+    totalBudget.displayCategory(categoryName);
+
+    //clear the form inputs and refocus the first one
+    event.target.children[0].focus();
+    event.target.children[0].value = "";
+    event.target.children[1].value = "";
+  }
 }
 
 //handler for when one of the items is removed
@@ -168,11 +186,20 @@ function removeItemFromCategory(event) {
 //handler for when the user updates their max budget
 function updateMaxBudget(event) {
   event.preventDefault();
-  totalBudget.maxBudget = Number(event.target.children[0].value);
-  document.querySelector("p.budget-max").innerText = `Total Budget: $${totalBudget.maxBudget}`;
-  totalBudget.displayBudgetRemaining(); //update the budget remaining
+  let budgetInput = Number(event.target.children[0].value);
 
-  event.target.children[0].value = ""; //clear the input
+  if (!budgetInput || budgetInput < 0) {
+    event.target.children[0].classList.add("bad-input");
+  } else {
+    event.target.children[0].classList.remove("bad-input");
+
+    totalBudget.maxBudget = budgetInput;
+
+    document.querySelector("p.budget-max").innerText = `Total Budget: $${totalBudget.maxBudget}`;
+    totalBudget.displayBudgetRemaining(); //update the budget remaining
+
+    event.target.children[0].value = ""; //clear the input
+  }
 }
 
 function collapseCategory(event) {
