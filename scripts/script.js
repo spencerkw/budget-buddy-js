@@ -137,7 +137,7 @@ class TotalBudget {
     for (let category of this.categories) {
       let receiptCategoryDiv = receipt.querySelector(`.${category.name}`);
       receiptCategoryDiv.innerHTML = "";
-      
+
       if (category.items.length > 0) {
         let categoryTitle = document.createElement("h3");
         categoryTitle.innerText = `${category.name.charAt(0).toUpperCase()}${category.name.slice(1)}`;
@@ -155,6 +155,10 @@ class TotalBudget {
     receiptTotal.innerText = `$${this.calculateTotal()}/$${this.maxBudget}`;
 
     receipt.style.display = "block";
+
+    receiptSound.pause();
+    receiptSound.currentTime = 0;
+    receiptSound.play();
   }
 }
 
@@ -163,6 +167,8 @@ const totalBudget = new TotalBudget();
 const registerSound = document.querySelector("#register-sound");
 registerSound.volume = 0.5;
 const warningSound = document.querySelector("#warning-sound");
+const receiptSound = document.querySelector("#receipt-sound");
+receiptSound.volume = 0.2;
 //console.log(totalBudget.addItem);
 
 function toggleFormsDisabled(state) {
