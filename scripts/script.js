@@ -11,7 +11,7 @@ class BudgetItem {
     return `
     <p class="item-name">${this.name}</p>
     <p class="item-cost">$${this.cost}</p>
-    <button class="remove-btn">Remove</button>
+    <button class="remove-btn"><i class="fas fa-minus"></i></button>
     `;
   }
 }
@@ -138,10 +138,14 @@ function addItemToCategory(event) {
 //handler for when one of the items is removed
 //removes the item from the appropriate category and redisplays that category
 function removeItemFromCategory(event) {
+  let target = event.target;
+  if (event.target.parentNode.classList.contains("remove-btn")) {
+    target = target.parentNode;
+  }
   //get the index attribute from the list item
-  let index = event.target.parentNode.attributes["index"].value;
+  let index = target.parentNode.attributes["index"].value;
   //get the class (category name) from the list item
-  let categoryName = event.target.parentNode.classList[0];
+  let categoryName = target.parentNode.classList[0];
   totalBudget.removeItem(index, categoryName);
   totalBudget.displayCategory(categoryName);
 }
@@ -166,7 +170,7 @@ main.addEventListener("submit", function(event) {
   }
 });
 main.addEventListener("click", function(event) {
-  if (event.target.classList.contains("remove-btn")) {
+  if (event.target.classList.contains("remove-btn") || event.target.parentNode.classList.contains("remove-btn")) {
     removeItemFromCategory(event);
   }
 });

@@ -6,6 +6,7 @@ html {
   background-size: cover;
   background-attachment: fixed;
   background-position: right 0 top 0;
+  
 }
 
 body {
@@ -35,6 +36,29 @@ a {
   text-decoration: none;
   color: inherit;
   margin: 5px;
+}
+
+input, button {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+input {
+  border: none;
+  border-bottom: 1px dotted black;;
+  background: none;
+  font-size: 15px;
+}
+
+::placeholder {
+  opacity: 1;
+  color: rgb(240, 248, 255);
+  
+}
+
+button {
+  border-radius: 10px;
+  background-color: rgb(15, 157, 88);
+  border-color: black;
 }
 
 a:hover {
@@ -119,10 +143,6 @@ form * {
 
 form.add-item * {
   max-width: 30%;
-}
-
-input, button {
-  border-radius: 10px;
 }
 
 footer {
