@@ -10,7 +10,7 @@ class BudgetItem {
   displayHTML() {
     return `
     <p class="item-name">${this.name}</p>
-    <p>$${this.cost}</p>
+    <p class="item-cost">$${this.cost}</p>
     <button class="remove-btn">Remove</button>
     `;
   }
