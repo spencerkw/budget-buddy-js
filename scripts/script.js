@@ -301,5 +301,4 @@ main.addEventListener("click", function(event) {
 let receipt = document.querySelector(".receipt");
 receipt.addEventListener("click", function() {
   receipt.style.display = "none"; 
-
-})
+});
