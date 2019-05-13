@@ -106,7 +106,7 @@ class TotalBudget {
     budgetRemainingP.innerText = `Remaining Budget: $${remaining}`;
     //TODO do some checking to see if over budget
     let alertFooter = document.querySelector("footer");
-    if (remaining < 0 && alertFooter.style.display === "none") { //if we're over budget and haven't displayed the footer yet
+    if (remaining < 0) { //if we're over budget
       //display it and start the animation again
       alertFooter.style.display = "flex";
       alertFooter.style.animationPlayState = "running";
@@ -120,7 +120,7 @@ class TotalBudget {
 
       //disable the forms
       toggleFormsDisabled(true);
-    } else if (remaining >= 0 && alertFooter.style.display !== "none") { //if we're not over budget and the footer is showing
+    } else if (remaining >= 0) { //if we're not over budget
       //hide the footer and pause the animation
       alertFooter.style.display = "none";
       alertFooter.style.animationPlayState = "paused";
@@ -177,6 +177,10 @@ const warningSound = document.querySelector("#warning-sound");
 const receiptSound = document.querySelector("#receipt-sound");
 receiptSound.volume = 0.2;
 
+//start with forms disabled
+toggleFormsDisabled(true);
+
+//sets all the add-item forms to be disabled or not depending on the var state
 function toggleFormsDisabled(state) {
   let addItemForms = document.querySelectorAll("form.add-item");
   for (let form of addItemForms) {
@@ -257,6 +261,8 @@ function updateMaxBudget(event) {
 
     totalBudget.maxBudget = budgetInput;
 
+    toggleFormsDisabled(false); //do this before checking the remaining
+
     document.querySelector("p.budget-max").innerText = `Total Budget: $${totalBudget.maxBudget}`;
     totalBudget.displayBudgetRemaining(); //update the budget remaining
 
@@ -295,4 +301,5 @@ main.addEventListener("click", function(event) {
 let receipt = document.querySelector(".receipt");
 receipt.addEventListener("click", function() {
   receipt.style.display = "none"; 
+
 })
