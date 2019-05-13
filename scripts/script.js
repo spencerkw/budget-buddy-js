@@ -200,22 +200,23 @@ function addItemToCategory(event) {
   //get the category name via the form's class
   let categoryName = event.target.classList[1];
   //get the input values
-  let name = event.target.children[0].value;
-  let cost = Number(event.target.children[1].value);
+  let inputs = event.target.querySelectorAll("input");
+  let name = inputs[0].value;
+  let cost = Number(inputs[1].value);
 
   let goodInput = true; //will be set to false if either input is bad
   if (!name) { //empty string or other bad input
-    event.target.children[0].classList.add("bad-input");
+    inputs[0].classList.add("bad-input");
     goodInput = false;
   } else {
-    event.target.children[0].classList.remove("bad-input");
+    inputs[0].classList.remove("bad-input");
   }
 
   if (!cost || cost < 0) {
-    event.target.children[1].classList.add("bad-input");
+    inputs[1].classList.add("bad-input");
     goodInput = false;
   } else {
-    event.target.children[1].classList.remove("bad-input");
+    inputs[1].classList.remove("bad-input");
   }
 
   //if the input is good, proceed
@@ -224,9 +225,9 @@ function addItemToCategory(event) {
     totalBudget.displayCategory(categoryName);
 
     //clear the form inputs and refocus the first one
-    event.target.children[0].focus();
-    event.target.children[0].value = "";
-    event.target.children[1].value = "";
+    inputs[0].focus();
+    inputs[0].value = "";
+    inputs[1].value = "";
 
     registerSound.pause();
     registerSound.currentTime = 0;
@@ -252,12 +253,13 @@ function removeItemFromCategory(event) {
 //handler for when the user updates their max budget
 function updateMaxBudget(event) {
   event.preventDefault();
-  let budgetInput = Number(event.target.children[0].value);
+  let input = event.target.querySelector("input");
+  let budgetInput = Number(input.value);
 
   if (!budgetInput || budgetInput < 0) {
-    event.target.children[0].classList.add("bad-input");
+    input.classList.add("bad-input");
   } else {
-    event.target.children[0].classList.remove("bad-input");
+    input.classList.remove("bad-input");
 
     totalBudget.maxBudget = budgetInput;
 
@@ -266,7 +268,7 @@ function updateMaxBudget(event) {
     document.querySelector("p.budget-max").innerText = `Total Budget: $${totalBudget.maxBudget}`;
     totalBudget.displayBudgetRemaining(); //update the budget remaining
 
-    event.target.children[0].value = ""; //clear the input
+    input.value = ""; //clear the input
 
     registerSound.pause();
     registerSound.currentTime = 0;
