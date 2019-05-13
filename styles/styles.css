@@ -92,6 +92,12 @@ section {
   margin: 8px;
 }
 
+.print-btn {
+  background-color: rgba(250, 238, 152);
+  padding: 8px;
+  font-size: 1rem;
+}
+
 .categories-section {
   background-color: rgba(250, 238, 152, 0.6);
 }

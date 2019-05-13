@@ -133,29 +133,35 @@ class TotalBudget {
   }
 
   printReceipt() {
+    //selects the class of .receipt
     let receipt = document.querySelector(".receipt");
+    //for of loop that loops through categories and adds the HTML to make up the receipt
     for (let category of this.categories) {
+      //sets a variable of receiptCategoryDiv to the element with a class equal to the name of the category
       let receiptCategoryDiv = receipt.querySelector(`.${category.name}`);
-      receiptCategoryDiv.innerHTML = "";
-
-      if (category.items.length > 0) {
-        let categoryTitle = document.createElement("h3");
+      receiptCategoryDiv.innerHTML = ""; //clear the content
+      if (category.items.length > 0) { //if there are items in the category
+        //make a category title
+        let categoryTitle = document.createElement("h3"); //creates an h3 element
         categoryTitle.innerText = `${category.name.charAt(0).toUpperCase()}${category.name.slice(1)}`;
-        receiptCategoryDiv.append(categoryTitle);
-
+        receiptCategoryDiv.append(categoryTitle); //appends the new h3 element to the div
+        
+        //create a container to list the items and add paragraphs for each of them
         let elementList = document.createElement("div");
         for (let item of category.items) {
           elementList.innerHTML += `<p>${item.name} @ $${item.cost}</p>`;
         }
-        receiptCategoryDiv.append(elementList);
+        receiptCategoryDiv.append(elementList); //appends the element list to the category div
       }
     }
 
+    //set the paragraph with the total to display the budget total
     let receiptTotal = receipt.querySelector(".receipt-total");
     receiptTotal.innerText = `$${this.calculateTotal()}/$${this.maxBudget}`;
 
-    receipt.style.display = "block";
+    receipt.style.display = "block"; //display the receipt
 
+    //play the receipt sound
     receiptSound.pause();
     receiptSound.currentTime = 0;
     receiptSound.play();
@@ -164,12 +170,12 @@ class TotalBudget {
 
 //the budget object
 const totalBudget = new TotalBudget();
+//access to the sound effects
 const registerSound = document.querySelector("#register-sound");
 registerSound.volume = 0.5;
 const warningSound = document.querySelector("#warning-sound");
 const receiptSound = document.querySelector("#receipt-sound");
 receiptSound.volume = 0.2;
-//console.log(totalBudget.addItem);
 
 function toggleFormsDisabled(state) {
   let addItemForms = document.querySelectorAll("form.add-item");
@@ -185,8 +191,6 @@ function toggleFormsDisabled(state) {
 //resets the form
 function addItemToCategory(event) {
   event.preventDefault();
-  // console.dir(event);
-  // console.dir(event.target);
   //event.target is the form that was submitted
 
   //get the category name via the form's class
@@ -196,7 +200,7 @@ function addItemToCategory(event) {
   let cost = Number(event.target.children[1].value);
 
   let goodInput = true; //will be set to false if either input is bad
-  if (!name) { //empty string or other bad output
+  if (!name) { //empty string or other bad input
     event.target.children[0].classList.add("bad-input");
     goodInput = false;
   } else {
@@ -283,12 +287,12 @@ main.addEventListener("click", function(event) {
     collapseCategory(event);
   } else if (event.target.classList.contains("remove-btn") || event.target.parentNode.classList.contains("remove-btn")) {
     removeItemFromCategory(event);
+  } else if (event.target.classList.contains("print-btn") || event.target.parentNode.classList.contains("print-btn")) {
+    totalBudget.printReceipt();
   }
 });
 
 let receipt = document.querySelector(".receipt");
 receipt.addEventListener("click", function() {
-  receipt.style.display = "none";
+  receipt.style.display = "none"; 
 })
-
-//console.log(totalBudget);
